@@ -1,0 +1,54 @@
+@{
+    ViewBag.Title = "Front End";
+    Layout = "~/Views/Shared/Base/_Layout.cshtml";
+}
+
+<form class="ui form form_certificacao">
+  <h4 class="ui dividing header">Entre em Contato</h4>
+
+  <div class="two fields">
+    <div class="field">
+      <label>Nome</label>
+      <div class="field">
+        <input type="text" name="nome" placeholder="Informe Seu Nome" required>
+      </div>
+    </div>
+    <div class="field">
+      <label>E-mail</label>
+      <div class="field">
+        <input type="email" name="email" placeholder="Informe Seu E-mail" required>
+      </div>
+    </div>
+  </div>
+
+  <div class="two fields">
+    <div class="field">
+      <label>Telefone</label>
+      <div class="field">
+        <input type="tel" class="mask_phone" name="tel" placeholder="Informe Seu Telefone" required>
+      </div>
+    </div>
+    <div class="field">
+      <label>Assunto</label>
+      <div class="field">
+        <input type="text" name="assunto" placeholder="Informe o Assunto" required>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Mensagem</label>
+    <textarea rows="2" name="mensagem" placeholder="Escreva uma mensagem" required></textarea>
+  </div>  
+
+  <button class="ui button" type="submit">Salvar Informações</button>
+</form>
+
+<div>
+    <p>Informações do Formulário</p>
+    <p>Nome: <span>---</span></p>
+    <p>E-mail: <span>---</span></p>
+    <p>Telefone: <span>---</span></p>
+    <p>Assunto: <span>---</span></p>
+    <p>Mensagem: <span>---</span></p>
+</div>

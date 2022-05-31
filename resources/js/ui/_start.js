@@ -46,6 +46,10 @@ require('./modules/policy');
 //--------------------[ MultiCD ]--------------------//
 require('./modules/multiCd');
 
+//--------------------[ Certicação ]--------------------//
+require('../functions/certificacao');
+
+
 //--------------------[ Start Document ]--------------------//
 $(document).ready(function(){
     "use strict";    
