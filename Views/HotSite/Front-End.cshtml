@@ -1,54 +1,82 @@
-@{
+﻿@{
     ViewBag.Title = "Front End";
     Layout = "~/Views/Shared/Base/_Layout.cshtml";
 }
 
-<form class="ui form form_certificacao">
-  <h4 class="ui dividing header">Entre em Contato</h4>
-
-  <div class="two fields">
-    <div class="field">
-      <label>Nome</label>
-      <div class="field">
-        <input type="text" name="nome" placeholder="Informe Seu Nome" required>
-      </div>
-    </div>
-    <div class="field">
-      <label>E-mail</label>
-      <div class="field">
-        <input type="email" name="email" placeholder="Informe Seu E-mail" required>
+<div class="ui container">
+  <div class="ui one column grid stackable middle aligned">
+    <div class="row">
+      <div class="column">
+        <h1>Inserir Informações</h1>
       </div>
     </div>
   </div>
+</div>
 
-  <div class="two fields">
-    <div class="field">
-      <label>Telefone</label>
-      <div class="field">
-        <input type="tel" class="mask_phone" name="tel" placeholder="Informe Seu Telefone" required>
+<div class="ui container margin bottom large">
+  <div class="ui grid">
+
+    <div class="row divided horizontal stackable">
+      
+      <div class="twelve wide column">
+
+          <form class="ui form form_certificacao">
+            <h4 class="ui dividing header">Entre em Contato</h4>
+
+            <div class="two fields">
+              <div class="field">
+                <label>Nome</label>
+                <div class="field">
+                  <input type="text" name="nome" id="input_name" placeholder="Informe Seu Nome" required>
+                </div>
+              </div>
+              <div class="field">
+                <label>E-mail</label>
+                <div class="field">
+                  <input type="email" name="email" id="input_email" placeholder="Informe Seu E-mail" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="two fields">
+              <div class="field">
+                <label>Telefone</label>
+                <div class="field">
+                  <input type="tel" class="mask_phone" id="input_tel" name="tel" placeholder="Informe Seu Telefone" required>
+                </div>
+              </div>
+              <div class="field">
+                <label>Assunto</label>
+                <div class="field">
+                  <input type="text" name="assunto" id="input_assunto" placeholder="Informe o Assunto" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Mensagem</label>
+              <textarea rows="2" name="mensagem" id="input_mensagem" placeholder="Escreva uma mensagem" required></textarea>
+            </div>  
+
+            <button class="ui button" type="submit">Salvar Informações</button>
+          </form>
+
       </div>
-    </div>
-    <div class="field">
-      <label>Assunto</label>
-      <div class="field">
-        <input type="text" name="assunto" placeholder="Informe o Assunto" required>
+
+      <div class="four wide column">
+
+          <div>
+              <p>Informações do Formulário</p>
+              <p>Nome: <span class="input_name">---</span></p>
+              <p>E-mail: <span class="input_email">---</span></p>
+              <p>Telefone: <span class="input_tel">---</span></p>
+              <p>Assunto: <span class="input_assunto">---</span></p>
+              <p>Mensagem: <span class="input_mensagem">---</span></p>
+          </div>
+
       </div>
+
     </div>
+
   </div>
-
-  <div class="field">
-    <label>Mensagem</label>
-    <textarea rows="2" name="mensagem" placeholder="Escreva uma mensagem" required></textarea>
-  </div>  
-
-  <button class="ui button" type="submit">Salvar Informações</button>
-</form>
-
-<div>
-    <p>Informações do Formulário</p>
-    <p>Nome: <span>---</span></p>
-    <p>E-mail: <span>---</span></p>
-    <p>Telefone: <span>---</span></p>
-    <p>Assunto: <span>---</span></p>
-    <p>Mensagem: <span>---</span></p>
 </div>
