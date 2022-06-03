@@ -56,10 +56,30 @@
             <div class="field">
               <label>Mensagem</label>
               <textarea rows="2" name="mensagem" id="input_mensagem" placeholder="Escreva uma mensagem" required></textarea>
-            </div>  
+            </div>
+
+            <input type="hidden" name="chave" id="input_chave" value="" >
 
             <button class="ui button" type="submit">Salvar Informações</button>
           </form>
+
+          <div class="lista_itens">
+
+            <div class="ui divider"></div>
+
+            <h4>Veja abaixo as Informações Salvas</h4>
+
+            <div class="ui message" id="mostra_message">
+              <div class="header">
+                Ops!
+              </div>
+              <p>Você ainda não possui nenhuma informação salva.</p>
+            </div>
+
+            <table class="ui celled table">
+            </table>
+            
+          </div>
 
       </div>
 
@@ -72,7 +92,7 @@
               <p>Telefone: <span class="input_tel">---</span></p>
               <p>Assunto: <span class="input_assunto">---</span></p>
               <p>Mensagem: <span class="input_mensagem">---</span></p>
-          </div>
+          </div>          
 
       </div>
 

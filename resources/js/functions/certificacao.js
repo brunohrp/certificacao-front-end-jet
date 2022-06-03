@@ -30,41 +30,38 @@ function isValidPhone (phone) {
   return true;
 }
 
-$(function(){
+function loadingTable() {
 
-    let session = getFromStorage('userForm');
+  let session = getFromStorage('userFormCertifica');
 
     if(session) {
       
       var infos = JSON.parse(session);
 
-      if(infos.name) {
-        $("#input_name").val(infos.name);
-        $(".input_name").text(infos.name);
-      }
+      $("#mostra_message").fadeOut();
+      $(".table").find("thead").remove();
+      $(".table").find("tr").remove();
+      $(".table").find("th").remove();
+      $(".table").find("td").remove();
 
-      if(infos.email) {
-        $("#input_email").val(infos.email);
-        $(".input_email").text(infos.email);
-      }
+      var tabela = "<thead><tr><th>Nome</th><th>E-mail</th><th>Telefone</th><th>Assunto</th><th>Ação</th></tr></thead><tbody>";
 
-      if(infos.ass) {
-        $("#input_assunto").val(infos.ass);
-        $(".input_assunto").text(infos.ass);
-      }
+      infos.forEach(function(val, key){
 
-      if(infos.me) {
-        $("#input_mensagem").val(infos.me);
-        $(".input_mensagem").text(infos.me);
-      }
+        tabela += "<tr><td>"+val.name+"</td><td>"+val.email+"</td><td>"+val.tel+"</td><td>"+val.ass+"</td><td><button class='ui button' id='click_buttom' data-id='"+key+"'>Editar</button><button class='ui red button' id='click_buttom_remove' data-id='"+key+"'>Remover</button></td></tr>";
 
-      if(infos.tel) {
-        $("#input_tel").val(infos.tel);
-        $(".input_tel").text(infos.tel);
-      }
+      });
 
+      tabela += "</tbody>";
+
+      $(".table").append(tabela);
+      
     }
-  
+}
+
+$(function(){
+
+  loadingTable();
 
     $('.ui.form.form_certificacao')
   .form({
@@ -222,15 +219,51 @@ $(function(){
 
       }
 
-      let userForm = {
-        'name': name,
-        'email': email,
-        'tel': tel,
-        'ass': ass,
-        'me': me
+      var item = getFromStorage('userFormCertifica');
+      if(item) {
+
+          var arrItem = JSON.parse(item);
+
+          let userFormCertificaArr = {
+            'name': name,
+            'email': email,
+            'tel': tel,
+            'ass': ass,
+            'me': me
+          }
+
+          var edit = $("#input_chave").val();
+          if(edit) {
+
+            arrItem[edit] = userFormCertificaArr;
+
+          } else {
+            arrItem.push(userFormCertificaArr);
+          }
+
+          setInStorage('userFormCertifica', JSON.stringify(arrItem));
+
+      } else {
+
+        let userFormCertificaArr = [{
+          'name': name,
+          'email': email,
+          'tel': tel,
+          'ass': ass,
+          'me': me
+        }]
+
+        setInStorage('userFormCertifica', JSON.stringify(userFormCertificaArr));
+
       }
 
-      setInStorage('userForm', JSON.stringify(userForm));
+      form.find("input").val("");
+      form.find("textarea").val("");
+      $(".input_name").text("---");
+      $(".input_email").text("---");
+      $(".input_tel").text("---");
+      $(".input_assunto").text("---");
+      $(".input_mensagem").text("---");
 
       swal({
         text: 'Sucesso!',
@@ -241,8 +274,79 @@ $(function(){
         confirmButtonText: 'OK'
       });
 
+      loadingTable();
+
       return false;
   
+  });
+
+  $(".table").on("click", "#click_buttom", function(){
+
+    var key = $(this).data('id');
+
+    let session = getFromStorage('userFormCertifica');
+    var infos = JSON.parse(session);
+
+    $("#input_name").val(infos[key].name);
+    $(".input_name").text(infos[key].name);
+    $("#input_email").val(infos[key].email);
+    $(".input_email").text(infos[key].email);
+    $("#input_assunto").val(infos[key].ass);
+    $(".input_assunto").text(infos[key].ass);
+    $("#input_mensagem").val(infos[key].me);
+    $(".input_mensagem").text(infos[key].me);
+    $("#input_tel").val(infos[key].tel);
+    $(".input_tel").text(infos[key].tel);
+    $("#input_chave").val(key);
+
+    document.querySelector('.menuheader').scrollIntoView({
+      behavior: 'smooth'
+    });
+
+
+  });
+
+  $(".table").on("click", "#click_buttom_remove", function(){
+
+    var key = $(this).data('id');
+
+    let session = getFromStorage('userFormCertifica');
+    var infos = JSON.parse(session);
+
+    swal({
+      title: 'Tem certeza que deseja remover?',
+      text: "Você não poderá reverter isso!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, Eu Quero!',
+      cancelButtonText: 'Não Quero!'
+    }).then((result) => {
+
+      if (result) {
+
+        infos.splice(key, 1);
+        setInStorage('userFormCertifica', JSON.stringify(infos));
+
+        swal({
+          text: 'Removido com sucesso!',
+          type: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'OK'
+        });
+  
+        loadingTable();
+      }
+    })
+
+    document.querySelector('.menuheader').scrollIntoView({
+      behavior: 'smooth'
+    });
+
+
   });
 
 });
